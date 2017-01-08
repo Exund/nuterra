@@ -10,7 +10,7 @@ namespace Maritaria
 		
 		public void Update()
 		{
-			if (Input.GetKeyDown(Mod.Config.FirstPersonKey))
+			if (Input.GetKeyDown(UnityGraph.Config.FirstPersonKey))
 			{
 				FirstPersonEnabled = !FirstPersonEnabled;
 			}

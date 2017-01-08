@@ -1,9 +1,9 @@
 using System;
 using UnityEngine;
 
-namespace Maritaria
+namespace Nuterra
 {
-	public class CleanLogger : ILogHandler
+	internal sealed class CleanLogger : ILogHandler
 	{
 		public void LogFormat(LogType logType, UnityEngine.Object context, string format, params object[] args)
 		{

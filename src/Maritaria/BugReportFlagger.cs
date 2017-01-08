@@ -13,7 +13,7 @@ namespace Maritaria
 		
 		public static string MarkUserMessage(string userMessage)
 		{
-			return $"Maritaria.BugReportFlagger({Mod.CurrentVersion})\n\n{userMessage}";
+			return $"Maritaria.BugReportFlagger({UnityGraph.CurrentVersion})\n\n{userMessage}";
 		}
 	}
 }

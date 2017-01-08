@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nuterra", "Nuterra\Nuterra.csproj", "{129AE68B-6968-44C4-A386-68C0E1E9A63E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Maritaria", "Maritaria\Maritaria.csproj", "{4E0A8434-38F0-4F2A-8518-C17FB0CAB791}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nuterra.Installer", "Nuterra.Installer\Nuterra.Installer.csproj", "{A86EF9AA-CE1A-4261-9CCB-47ACA387A5C0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{129AE68B-6968-44C4-A386-68C0E1E9A63E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{129AE68B-6968-44C4-A386-68C0E1E9A63E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{129AE68B-6968-44C4-A386-68C0E1E9A63E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{129AE68B-6968-44C4-A386-68C0E1E9A63E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E0A8434-38F0-4F2A-8518-C17FB0CAB791}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E0A8434-38F0-4F2A-8518-C17FB0CAB791}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E0A8434-38F0-4F2A-8518-C17FB0CAB791}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E0A8434-38F0-4F2A-8518-C17FB0CAB791}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A86EF9AA-CE1A-4261-9CCB-47ACA387A5C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A86EF9AA-CE1A-4261-9CCB-47ACA387A5C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A86EF9AA-CE1A-4261-9CCB-47ACA387A5C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A86EF9AA-CE1A-4261-9CCB-47ACA387A5C0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

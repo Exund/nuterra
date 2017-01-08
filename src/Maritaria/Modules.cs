@@ -10,10 +10,10 @@ namespace Maritaria
 			//Hook by replacing method body of ModuleDrill.ControlInput()
 			public static void Input(ModuleDrill module, int aim, bool fire)
 			{
-				KeyCode keyCode = Mod.Config.DrillKey;
+				KeyCode keyCode = UnityGraph.Config.DrillKey;
 				if ((module.block != null) && (module.block.BlockType == BlockTypes.GCBuzzSaw_312))
 				{
-					keyCode = Mod.Config.SawKey;
+					keyCode = UnityGraph.Config.SawKey;
 				}
 				module.m_Spinning = (fire || Modules.GetPlayerInput(module, keyCode));
 			}
@@ -43,9 +43,9 @@ namespace Maritaria
 
 			public static bool CheckOutputConditions_Anchored(ModuleEnergy module)
 			{
-				if (module.block.BlockType == BlockTypes.GSOGeneratorSolar_141 && module.block.tank && !module.block.tank.beam.IsActive && module.block.tank.rbody.velocity.magnitude < Mod.Config.MobileSolarVelocityThreshold)
+				if (module.block.BlockType == BlockTypes.GSOGeneratorSolar_141 && module.block.tank && !module.block.tank.beam.IsActive && module.block.tank.rbody.velocity.magnitude < UnityGraph.Config.MobileSolarVelocityThreshold)
 				{
-					return Mod.Config.MobileSolarPanels;
+					return UnityGraph.Config.MobileSolarPanels;
 				}
 				return (module.m_OutputConditions & ModuleEnergy.OutputConditionFlags.Anchored) == (ModuleEnergy.OutputConditionFlags)0 || (module.block.tank && module.block.tank.IsAnchored);
 			}
@@ -63,7 +63,7 @@ namespace Maritaria
 			public static float GetOutputMultiplier(ModuleEnergy module)
 			{
 				float result = 1f;
-				if (module.block.BlockType == BlockTypes.GSOGeneratorSolar_141 && Mod.Config.MobileSolarPanels)
+				if (module.block.BlockType == BlockTypes.GSOGeneratorSolar_141 && UnityGraph.Config.MobileSolarPanels)
 				{
 					result = 0.1f;
 				}
@@ -80,7 +80,7 @@ namespace Maritaria
 			//Hook by replacing method body of ModuleHammer.ControlInput()
 			public static void Input(ModuleHammer module, int aim, bool fire)
 			{
-				module.state.enabled=(fire || Modules.GetPlayerInput(module, Mod.Config.HammerKey));
+				module.state.enabled=(fire || Modules.GetPlayerInput(module, UnityGraph.Config.HammerKey));
 			}
 		}
 		
@@ -112,7 +112,7 @@ namespace Maritaria
 			//Hook by replacing method body of ModuleScoop.ControlInput()
 			public static void Input(ModuleScoop module, int aim, bool fire)
 			{
-				fire = (fire || Modules.GetPlayerInput(module, Mod.Config.ScoopKey));
+				fire = (fire || Modules.GetPlayerInput(module, UnityGraph.Config.ScoopKey));
 				if (module.actuator.isPlaying)
 				{
 					return;
@@ -136,7 +136,7 @@ namespace Maritaria
 			{
 				if (module.block.BlockType == BlockTypes.GCPlasmaCutter_222)
 				{
-					fire = (fire || Modules.GetPlayerInput(module, Mod.Config.PlasmaKey));
+					fire = (fire || Modules.GetPlayerInput(module, UnityGraph.Config.PlasmaKey));
 				}
 				module.AimControl = aim;
 				module.FireControl = (fire && Time.timeScale != 0f);

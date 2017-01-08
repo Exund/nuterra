@@ -6,14 +6,14 @@ namespace Maritaria
 {
 	public class ProductionStoppedSign : MonoBehaviour
 	{
-		private static readonly string StopSignFile = Path.Combine(Mod.DataDirectory, "stop_sign.png");
+		private static readonly string StopSignFile = @"Assets/Images/stop_sign.png";
 		private static Texture2D _stopSign;
 		private TankBlock _block;
 		private static readonly Rect _signDrawSize = new Rect(0, 0, 32, 32);
 		
 		private void Start()
 		{
-			_stopSign = new SpriteFactory().CreateTexture(StopSignFile);
+			_stopSign = AssetBundleImport.Load<Texture2D>(StopSignFile);
 		}
 		
 		private void Awake()

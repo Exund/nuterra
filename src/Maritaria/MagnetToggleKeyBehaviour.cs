@@ -17,7 +17,7 @@ namespace Maritaria
 
 		public void Update()
 		{
-			if (Input.GetKeyDown(Mod.Config.MagnetToggleKey))
+			if (Input.GetKeyDown(UnityGraph.Config.MagnetToggleKey))
 			{
 				Modules.Magnet.DisabledForPlayerControlledTank = !Modules.Magnet.DisabledForPlayerControlledTank;
 			}

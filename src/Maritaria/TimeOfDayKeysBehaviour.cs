@@ -7,11 +7,11 @@ namespace Maritaria
 	{
 		public void Update()
 		{
-			if (Input.GetKeyDown(Mod.Config.TurnDayKey))
+			if (Input.GetKeyDown(UnityGraph.Config.TurnDayKey))
 			{
 				Singleton.Manager<ManTimeOfDay>.inst.SetTimeOfDay(12, 0, 0);
 			}
-			if (Input.GetKeyDown(Mod.Config.TurnNightKey))
+			if (Input.GetKeyDown(UnityGraph.Config.TurnNightKey))
 			{
 				Singleton.Manager<ManTimeOfDay>.inst.SetTimeOfDay(0, 0, 0);
 			}
