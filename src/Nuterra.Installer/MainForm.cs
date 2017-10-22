@@ -87,45 +87,26 @@ namespace Nuterra.Installer
 			{
 				Console.WriteLine();
 
-				var info = new ModificationInfo();
-				info.TerraTechRoot = Path.GetDirectoryName(installSettings.TerraTechRoot);
 				string localNuterra = Path.Combine(Directory.GetCurrentDirectory(), "Nuterra_Data");
 
+				var info = new ModificationInfo();
+				info.TerraTechRoot = Path.GetDirectoryName(installSettings.TerraTechRoot);
 				info.NuterraData = localNuterra;
 				info.InitDefaults();
 
-				string localMods = Path.Combine(localNuterra, "Mods");
-				if (!Directory.Exists(localMods))
-				{
-					throw new Exception("Missing mods from install directory Nuterra_Data/Mods!");
-				}
-
 				Console.WriteLine("Modding Assembly-CSharp.dll");
 				InstallProgram.PerformInstall(info);
+				Console.WriteLine();
 
-				Console.WriteLine("Copying Assetbundles");
-				string moddedNuterra = Path.Combine(info.TerraTechRoot, "Nuterra_Data");
-				if (!Directory.Exists(moddedNuterra))
+				if (!ArePathsEqual(Directory.GetCurrentDirectory(), info.TerraTechRoot))
 				{
-					Directory.CreateDirectory(moddedNuterra);
+					CopyNuterraFiles(info, localNuterra);
+				}
+				else
+				{
+					Console.WriteLine("You are running the installer from the terratech root directory, copying files is skipped");
 				}
 
-				File.Copy($"{localNuterra}\\mod-nuterra.manifest", $"{moddedNuterra}\\mod-nuterra.manifest", overwrite: true);
-				File.Copy($"{localNuterra}\\mod-nuterra", $"{moddedNuterra}\\mod-nuterra", overwrite: true);
-
-				Console.WriteLine("Copying Mods");
-				string moddedMods = Path.Combine(moddedNuterra, "Mods");
-				if (!Directory.Exists(moddedMods))
-				{
-					Directory.CreateDirectory(moddedMods);
-				}
-
-				foreach (string file in Directory.EnumerateFiles(localMods, "*.dll"))
-				{
-					string modName = Path.GetFileName(file);
-					Console.WriteLine($"- {modName}");
-					File.Copy(file, $"{moddedMods}\\{modName}", overwrite: true);
-				}
 				Console.WriteLine();
 				Console.WriteLine("Install succesfull");
 				Console.WriteLine("Enjoy Nuterra :3");
@@ -143,6 +124,48 @@ namespace Nuterra.Installer
 				_installerThread = null;
 				Invoke(new Action(() => { UpdateFromInstallSettings(logEvents: false); }));
 			}
+		}
+
+		private static void CopyNuterraFiles(ModificationInfo info, string localNuterra)
+		{
+			string moddedNuterra = Path.Combine(info.TerraTechRoot, "Nuterra_Data");
+			CopyDirectory(localNuterra, moddedNuterra, "Assets", "*");
+			CopyDirectory(localNuterra, moddedNuterra, "Mods", "*.dll");
+		}
+
+		private static void CopyDirectory(string localNuterra, string moddedNuterra, string dirname, string filePattern)
+		{
+			Console.WriteLine($"Copying {dirname}");
+			string source = Path.Combine(localNuterra, dirname);
+			if (!Directory.Exists(source))
+			{
+				Console.WriteLine("Warning: missing directory from install dir!");
+				return;
+			}
+			string target = Path.Combine(moddedNuterra, dirname);
+			if (!Directory.Exists(target))
+			{
+				Directory.CreateDirectory(target);
+			}
+
+			foreach (string file in Directory.EnumerateFiles(source, filePattern))
+			{
+				string fileName = Path.GetFileName(file);
+				Console.WriteLine($"- {fileName}");
+				File.Copy(file, Path.Combine(target, fileName), overwrite: true);
+			}
+			Console.WriteLine();
+		}
+
+		private bool ArePathsEqual(string path1, string path2)
+		{
+			if (path1 == null) throw new ArgumentNullException(nameof(path1));
+			if (path2 == null) throw new ArgumentNullException(nameof(path2));
+			path1 = Path.GetFullPath(path1);
+			path2 = Path.GetFullPath(path2);
+			bool isUnix = (Path.DirectorySeparatorChar == '/');
+			StringComparison pathComparison = isUnix ? StringComparison.CurrentCulture : StringComparison.CurrentCultureIgnoreCase;
+			return path1.Equals(path2, pathComparison);
 		}
 	}
 }

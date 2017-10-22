@@ -10,12 +10,13 @@ namespace Nuterra
 
 		public static void Register(CustomBlock block)
 		{
+			Console.WriteLine($"Registering block: {block.GetType()} #{block.BlockID} '{block.Name}'");
 			int blockID = block.BlockID;
 			CustomBlocks.Add(blockID, block);
 			int hashCode = ItemTypeInfo.GetHashCode(ObjectTypes.Block, blockID);
 			ManSpawn spawnManager = ManSpawn.inst;
-			spawnManager.VisibleTypeInfo.SetDescriptor<FactionSubTypes>(hashCode, block.Faction);
-			spawnManager.VisibleTypeInfo.SetDescriptor<BlockCategories>(hashCode, block.Category);
+			spawnManager.VisibleTypeInfo.SetDescriptor(hashCode, block.Faction);
+			spawnManager.VisibleTypeInfo.SetDescriptor(hashCode, block.Category);
 			spawnManager.AddBlockToDictionary(block.Prefab);
 			RecipeManager.inst.m_BlockPriceLookup.Add(blockID, block.Price);
 		}
